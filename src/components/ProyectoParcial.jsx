@@ -36,7 +36,7 @@ const SLIDES = [
     data: {
       product: "Boletealo 🎟️",
       tagline: "Plataforma de Venta de Tickets Online",
-      maestria: "Maestría en Ciencia de Datos e IA (CDIA V4)",
+      maestria: "Maestría en Ciencia de Datos e IA",
       curso: "Cloud Computing",
       docente: "Geraldo Colchado | Enero 2026",
       badge: "MVP en AWS · 100% Serverless",

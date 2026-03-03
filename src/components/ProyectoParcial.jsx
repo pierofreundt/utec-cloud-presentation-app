@@ -372,30 +372,53 @@ And el botón refleja el nuevo estado inmediatamente en la UI`,
 
   // ── 10. COSTOS AWS ────────────────────────────────────────────────────────
   {
-    id: 10, type: "costs",
-    title: "Costos AWS",
-    data: {
-      tabla: [
-        { s: "AWS Lambda", uso: "5 funciones · ~50k invocaciones/mes", costo: "$0.00", nota: "Free Tier: 1M req/mes" },
-        { s: "API Gateway (HTTP)", uso: "5 APIs · ~50k requests/mes", costo: "~$0.05", nota: "$1/millón de requests" },
-        { s: "DynamoDB", uso: "5 tablas · PAY_PER_REQUEST · <1GB", costo: "$0.00", nota: "Free Tier: 25GB + 25 WCU/RCU" },
-        { s: "S3 (Frontend)", uso: "Static website · ~50MB", costo: "$0.00", nota: "Free Tier: 5GB" },
-        { s: "S3 (Evidencias)", uso: "Fotos de incidentes · ~1GB/mes", costo: "~$0.02", nota: "$0.023/GB almacenado" },
-        { s: "SSM Parameter Store", uso: "3 parámetros standard", costo: "$0.00", nota: "Standard tier gratis" },
-        { s: "EC2 t2.micro", uso: "Terminal de deploy (esporádico)", costo: "$0.00", nota: "Free Tier: 750h/mes" },
-        { s: "CloudFormation", uso: "5 stacks", costo: "$0.00", nota: "Sin costo adicional" },
+    "id": 10,
+    "type": "costs",
+    "title": "Costos AWS",
+    "data": {
+      "tabla": [
+        {
+          "s": "AWS Lambda",
+          "uso": "5 funciones · 100K invocaciones/mes · 500ms · 128MB RAM",
+          "costo": "$0.00",
+          "nota": "100K invocaciones ≈ 6,250 GB-s/mes · debajo del Free Tier (400,000 GB-s)"
+        },
+        {
+          "s": "Amazon API Gateway (HTTP)",
+          "uso": "5 HTTP APIs · 100K requests/mes",
+          "costo": "$0.10",
+          "nota": "$1.00 por millón de requests · HTTP API (~70% más barato que REST)"
+        },
+        {
+          "s": "Amazon DynamoDB",
+          "uso": "5 tablas on-demand · 0.5GB · 100K writes · 300K reads",
+          "costo": "$0.21",
+          "nota": "Modo PAY_PER_REQUEST · costo por almacenamiento + lecturas/escrituras consumidas"
+        },
+        {
+          "s": "Amazon S3",
+          "uso": "Frontend estático + bucket evidencias · ~1GB",
+          "costo": "$0.03",
+          "nota": "Free Tier cubre primeros 5GB · ~$0.023/GB almacenado"
+        },
+        {
+          "s": "AWS SSM Parameter Store",
+          "uso": "3 parámetros standard (jwt_secret, urls inter-servicios)",
+          "costo": "$0.00",
+          "nota": "Standard tier gratuito hasta 10,000 parámetros"
+        }
       ],
-      total: "~$0.07 / mes (MVP con carga baja)",
-      nota: "Estimación vía AWS Pricing Calculator: calculator.aws · Escala automáticamente con el uso.",
+      "total": "$0.34 USD/mes",
+      "nota": "Total anual estimado: $4.08 USD/año · Región: US East (N. Virginia) · Escenario: ~100,000 requests/mes"
     },
-    notes: [
-      "El MVP corre prácticamente GRATIS dentro del Free Tier de AWS.",
-      "DynamoDB PAY_PER_REQUEST elimina costos de capacidad aprovisionada.",
-      "Lambda cobra solo por invocación — ideal para tráfico bajo inicial.",
-      "Con 10k usuarios activos: estimado ~$15-30/mes vs $100+ en servidor dedicado.",
-      "Para costos reales: https://calculator.aws",
-    ],
-  },
+    "notes": [
+      "Arquitectura serverless escala automáticamente.",
+      "El costo crece de forma lineal con el tráfico.",
+      "~$3.50/mes con 1M requests.",
+      "~$35.00/mes con 10M requests.",
+      "Estimación basada en AWS Pricing Calculator."
+    ]
+  }
 
   // ── 11. IMPLEMENTACIÓN ────────────────────────────────────────────────────
   {

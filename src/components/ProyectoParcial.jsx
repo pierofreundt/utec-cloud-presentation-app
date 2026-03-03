@@ -418,7 +418,7 @@ And el botón refleja el nuevo estado inmediatamente en la UI`,
       "~$35.00/mes con 10M requests.",
       "Estimación basada en AWS Pricing Calculator."
     ]
-  }
+  },
 
   // ── 11. IMPLEMENTACIÓN ────────────────────────────────────────────────────
   {
